@@ -3,13 +3,13 @@
 import { useId, useState } from "react";
 import { useRouter } from "next/navigation";
 import {
-  getFeeling,
   isMoreFeeling,
   MORE_FEELINGS,
   OWN_WORDS_ID,
   PRIMARY_FEELINGS,
   type Feeling,
 } from "@/lib/feelings";
+import { namingLine } from "@/lib/acknowledgment";
 import { needsSupport } from "@/lib/safety/detector";
 import { getStorage } from "@/lib/storage";
 import styles from "./CheckInForm.module.css";
@@ -28,7 +28,7 @@ export function CheckInForm() {
   const [saving, setSaving] = useState(false);
 
   const isOwnWords = selected === OWN_WORDS_ID;
-  const chosenLabel = isOwnWords ? ownWord.trim() : getFeeling(selected)?.label;
+  const naming = selected ? namingLine(selected, ownWord) : null;
   const canContinue = Boolean(selected) && (!isOwnWords || ownWord.trim().length > 0) && !saving;
 
   async function handleSubmit(e: React.FormEvent) {
@@ -120,10 +120,13 @@ export function CheckInForm() {
 
       {selected && (
         <div className={`${styles.after} ${styles.reveal}`} aria-live="polite">
-          {chosenLabel && (
-            <p className={styles.chose}>
-              You chose <em>{chosenLabel}</em>
-            </p>
+          {naming && (
+            <>
+              <p className={styles.chose}>
+                You&apos;re feeling <em>{naming.word}</em>.
+              </p>
+              <p className={styles.choseSub}>{naming.sub}</p>
+            </>
           )}
           <label htmlFor={noteId} className={styles.fieldLabel}>
             What would you like to acknowledge?

@@ -29,7 +29,8 @@ describe("CheckInForm", () => {
     expect(cont).toBeDisabled();
 
     await user.click(screen.getByRole("radio", { name: "Sad" }));
-    expect(screen.getByText("You chose")).toBeInTheDocument();
+    expect(screen.getByText(/You.re feeling/)).toHaveTextContent("You're feeling sad.");
+    expect(screen.queryByText(/You chose/)).not.toBeInTheDocument();
     await user.type(screen.getByLabelText("What would you like to acknowledge?"), "miss ko na sila");
     await user.click(cont);
 
@@ -42,7 +43,9 @@ describe("CheckInForm", () => {
     await user.click(screen.getByRole("radio", { name: "In my own words" }));
     const cont = screen.getByRole("button", { name: /continue/i });
     expect(cont).toBeDisabled();
-    await user.type(screen.getByLabelText("What's the word for it?"), "lutang");
+    await user.type(screen.getByLabelText("What's the word for it?"), "stressed");
     expect(cont).toBeEnabled();
+    expect(screen.getByText(/You.re feeling/)).toHaveTextContent("You're feeling stressed.");
+    expect(screen.getByText("Salamat for finding your own word for it.")).toBeInTheDocument();
   });
 });

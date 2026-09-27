@@ -101,3 +101,23 @@ export function acknowledge(checkIn: Pick<CheckIn, "feelingId" | "customWord" | 
   }
   return { title: known.title, accent: known.accent, body: `${known.line} ${closing}` };
 }
+
+/**
+ * The line shown right after a feeling is picked on the check-in screen.
+ * Warm, not transactional ("You chose X" read like a form receipt).
+ */
+export function namingLine(feelingId: string, customWord?: string): { word: string; sub: string } | null {
+  if (feelingId === OWN_WORDS_ID) {
+    const word = customWord?.trim();
+    return word ? { word, sub: "Salamat for finding your own word for it." } : null;
+  }
+  const feeling = getFeeling(feelingId);
+  if (!feeling) return null;
+  const sub =
+    feeling.weight === "heavy"
+      ? "Salamat for naming it. Hindi laging madali 'yan."
+      : feeling.weight === "light"
+        ? "It's good that you noticed it."
+        : "Salamat for naming it.";
+  return { word: feeling.label.toLowerCase(), sub };
+}
