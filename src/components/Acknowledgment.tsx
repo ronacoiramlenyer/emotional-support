@@ -25,7 +25,7 @@ export function Acknowledgment() {
         {checkIn.note && <blockquote className="quote">{checkIn.note}</blockquote>}
         <p className="subtitle">
           What you wrote sounds really painful. You don&apos;t have to hold this alone tonight —
-          may mga taong handang makinig, ngayon mismo. You can call or text any of these, anytime.
+          may mga taong handang makinig, ngayon mismo. You can call any of these, anytime.
         </p>
         <CrisisResources />
         <div className="actions">

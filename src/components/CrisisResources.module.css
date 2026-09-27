@@ -61,3 +61,32 @@
   font-size: 0.9375rem;
   margin: var(--space-2) 0 0;
 }
+
+.tip {
+  color: var(--text-muted);
+  font-size: 0.9375rem;
+  margin: 0;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0 0 var(--space-2);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.runBy {
+  color: var(--text-faint);
+}
+
+.groupTitle {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 1.125rem;
+  color: var(--text-muted);
+  margin: var(--space-4) 0 0;
+}
