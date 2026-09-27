@@ -20,6 +20,22 @@ npm test
 npm run lint    # typecheck
 ```
 
+## Deploy (Cloudflare Workers)
+
+The app runs on Cloudflare Workers via the OpenNext adapter. The Worker is
+named **tanglaw** (`wrangler.jsonc`).
+
+**From GitHub (recommended):** Cloudflare dashboard → Workers & Pages →
+Create → Import a repository → pick this repo. Use:
+
+- Build command: `npx opennextjs-cloudflare build`
+- Deploy command: `npx opennextjs-cloudflare deploy`
+
+Every push to the production branch then redeploys automatically.
+
+**From your machine:** `npx wrangler login`, then `npm run deploy`.
+`npm run preview` runs the Worker locally first.
+
 ## Structure
 
 ```
